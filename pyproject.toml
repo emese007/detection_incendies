@@ -7,3 +7,11 @@ requires-python = ">=3.12"
 dependencies = [
     "pandas>=2.3.2",
 ]
+
+[tool.basedpyright]
+typeCheckingMode = "basic"
+reportUnknownVariableType = false
+reportUnknownMemberType = false
+reportUnknownParameterType = false
+useLibraryCodeForTypes = true
+
