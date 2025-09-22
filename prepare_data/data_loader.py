@@ -10,7 +10,9 @@ def load_data(file):
     df_annotations = pd.json_normalize(json_data['annotations'])
     df_categories = pd.json_normalize(json_data['categories'])
 
-    df_categories = df_categories.rename(columns={'id': 'category_id'})
+    df_categories = df_categories.rename(
+        columns={'id': 'category_id', 'name': 'category_name'}
+    )
 
     df_images_annotations = df_images.merge(df_annotations, 'inner', 'id')
     df_merged = df_categories.merge(
@@ -22,4 +24,3 @@ def load_data(file):
 
 
 # print(load_data('./data/raw/_annotations.coco.json'))
-
