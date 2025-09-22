@@ -3,15 +3,24 @@ import json
 
 
 def load_data(file):
-    with open(file, "r") as raw_json:
-        data = json.load(raw_json)
+    with open(file, 'r') as raw_json:
+        json_data = json.load(raw_json)
 
-    images = []
-    for image in data["images"]:
-        images.append(image)
+    df_images = pd.json_normalize(json_data['images'])
+    df_annotations = pd.json_normalize(json_data['annotations'])
+    df_categories = pd.json_normalize(json_data['categories'])
 
-    df = pd.json_normalize(images)
-    return df
+    df_categories = df_categories.rename(
+        columns={'id': 'category_id', 'name': 'category_name'}
+    )
+
+    df_images_annotations = df_images.merge(df_annotations, 'inner', 'id')
+    df_merged = df_categories.merge(
+        df_images_annotations,
+        'inner',
+        'category_id',
+    )
+    return df_merged, json_data
 
 
-print(load_data("data/raw/_annotations.coco.json"))
+# print(load_data('./data/raw/_annotations.coco.json'))
