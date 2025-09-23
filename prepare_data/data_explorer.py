@@ -1,10 +1,7 @@
 import matplotlib.pyplot as plt
-from data_loader import load_data
-
-df, json_data = load_data('./data/raw/_annotations.coco.json')
 
 
-def get_basic_informations(json_data):
+def get_basic_informations(df, json_data):
     n_images = len(json_data['images'])
     n_annotations = len(json_data['annotations'])
     n_categories = len(json_data['categories'])
@@ -29,10 +26,11 @@ def get_annotations_per_image(df):
 
 def get_n_images_per_category(df):
     images_per_category = df.groupby('category_name')['image_id'].nunique()
-    print(f'\nNUMBER OF IMAGES PER CATEGORY:\n{images_per_category}')
+    print(f'\nNUMBER OF IMAGES PER CATEGORY ->\n{images_per_category}')
+    print(images_per_category.head())
 
 
-def get_bbox_images_size(df):
+def get_bbox_images_size(df, json_data):
     images_width = [image['width'] for image in json_data['images']]
     images_height = [image['height'] for image in json_data['images']]
     bboxes_width = df['bbox'].apply(lambda x: x[2])
@@ -61,9 +59,3 @@ def get_bbox_images_size(df):
     plt.xlabel('Area (pixels)')
     plt.ylabel('Number of bboxes')
     plt.show()
-
-
-get_basic_informations(json_data)
-get_annotations_per_image(df)
-get_n_images_per_category(df)
-get_bbox_images_size(df)

@@ -1,6 +1,9 @@
+from pipeline import run_pipeline
+
+
 def main():
-    print("Hello from detection-incendies!")
+    run_pipeline()
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()
