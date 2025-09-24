@@ -2,6 +2,12 @@
 
 
 def get_basic_informations(df, json_data):
+    if (
+        'images' not in json_data
+        or 'annotations' not in json_data
+        or 'categories' not in json_data
+    ):
+        return 'Coco json file structure is invalid.'
     n_images = len(json_data['images'])
     n_annotations = len(json_data['annotations'])
     n_categories = len(json_data['categories'])

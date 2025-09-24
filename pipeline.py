@@ -11,7 +11,7 @@ from prepare_data.data_cleaner import (
     check_image_files,
     get_invalid_annotations,
     get_orphaned_annotations,
-    process_data,
+    preprocess_data,
 )
 
 
@@ -31,4 +31,4 @@ def run_pipeline():
     get_orphaned_annotations(df, json_data)
     get_invalid_annotations(df)
 
-    process_data('./data/raw/', df, json_data)
+    preprocess_data('./data/raw/', df, json_data)

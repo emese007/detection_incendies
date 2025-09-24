@@ -116,11 +116,11 @@ def get_invalid_annotations(df: pd.DataFrame, need_print: bool = True) -> pd.Dat
     return pd.DataFrame(invalid_annotations)
 
 
-def process_data(
+def preprocess_data(
     directory_path: str, df: pd.DataFrame, original_json_data: dict
 ) -> None:
     """
-    Process data by removing images that do not have annotations, images that do not exist as files, orphaned annotations, invalid annotations.
+    Preprocess data by removing images that do not have annotations, images that do not exist as files, orphaned annotations, invalid annotations.
     Args:
         directory_path: str
     Returns:
@@ -132,7 +132,7 @@ def process_data(
         print(f'Error -> {directory_path} is not a valid directory.')
         return
 
-    destination_directory = source_directory.parent / 'processed' / 'data'
+    destination_directory = source_directory.parent / 'preprocessed' / 'data'
 
     if not os.path.exists(destination_directory):
         shutil.copytree(source_directory, destination_directory)
@@ -161,7 +161,7 @@ def process_data(
             if i['id'] not in images_without_annotations_list
         ]
         print(
-            f'· Succesfully deleted {len(images_without_annotations_list)} images without annotations from processed coco json file at `{path_new_json_file}`.'
+            f'· Succesfully deleted {len(images_without_annotations_list)} images without annotations from preprocessed coco json file at `{path_new_json_file}`.'
         )
 
     invalid_annotations_df = get_invalid_annotations(df, need_print=False)
@@ -173,11 +173,11 @@ def process_data(
             if i['id'] not in invalid_annotations_df['image_id'].values
         ]
         print(
-            f'· Succesfully deleted {len(invalid_annotations_df)} images that had invalid annotations from processed coco json file.'
+            f'· Succesfully deleted {len(invalid_annotations_df)} images that had invalid annotations from preprocessed coco json file.'
         )
     else:
         print(
-            '· No invalid annotation was found therefore no image has been deleted from processed coco json file.'
+            '· No invalid annotation was found therefore no image has been deleted from preprocessed coco json file.'
         )
 
     orphaned_annotations_df = get_orphaned_annotations(
@@ -191,11 +191,11 @@ def process_data(
             if i['image_id'] not in orphaned_annotations_df['image_id'].values
         ]
         print(
-            f'· Succesfully deleted {len(orphaned_annotations_df)} orphaned annotations from processed coco json file.'
+            f'· Succesfully deleted {len(orphaned_annotations_df)} orphaned annotations from preprocessed coco json file.'
         )
     else:
         print(
-            '· No orphaned annotation was found therefore none was deleted from processed coco json file.'
+            '· No orphaned annotation was found therefore none was deleted from preprocessed coco json file.'
         )
 
     images_not_found_in_directory_df = check_image_files(
@@ -209,7 +209,7 @@ def process_data(
             if i['id'] not in images_not_found_in_directory_df['image_id'].values
         ]
         print(
-            f'· Succesfully deleted {len(images_not_found_in_directory_df)} images that were not found in expected directory from processed coco json file.'
+            f'· Succesfully deleted {len(images_not_found_in_directory_df)} images that were not found in expected directory from preprocessed coco json file.'
         )
         new_json_data['annotations'] = [
             i
@@ -217,14 +217,14 @@ def process_data(
             if i['image_id'] not in images_not_found_in_directory_df['image_id'].values
         ]
         print(
-            f'· Succesfully deleted {len(images_not_found_in_directory_df)} annotations linked to images that were not found in expected directory from processed coco json file.'
+            f'· Succesfully deleted {len(images_not_found_in_directory_df)} annotations linked to images that were not found in expected directory from preprocessed coco json file.'
         )
     else:
         print(
-            '· All images were found in expected directory therefore nothing was deleted from processed coco json file.'
+            '· All images were found in expected directory therefore nothing was deleted from preprocessed coco json file.'
         )
 
-    with open(path_new_json_file, 'w') as processed_json_file:
-        json.dump(new_json_data, processed_json_file, indent=2)
+    with open(path_new_json_file, 'w') as preprocessed_json_file:
+        json.dump(new_json_data, preprocessed_json_file, indent=2)
 
     return None
