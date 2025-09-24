@@ -158,7 +158,7 @@ def process_data(
         new_json_data['images'] = [
             i
             for i in new_json_data['images']
-            if i['id'] in images_without_annotations_list
+            if i['id'] not in images_without_annotations_list
         ]
         print(
             f'· Succesfully deleted {len(images_without_annotations_list)} images without annotations from processed coco json file at `{path_new_json_file}`.'
@@ -170,7 +170,7 @@ def process_data(
         new_json_data['images'] = [
             i
             for i in new_json_data['images']
-            if i['id'] in invalid_annotations_df['image_id'].values
+            if i['id'] not in invalid_annotations_df['image_id'].values
         ]
         print(
             f'· Succesfully deleted {len(invalid_annotations_df)} images that had invalid annotations from processed coco json file.'
@@ -188,7 +188,7 @@ def process_data(
         new_json_data['annotations'] = [
             i
             for i in new_json_data['annotations']
-            if i['image_id'] in orphaned_annotations_df['image_id'].values
+            if i['image_id'] not in orphaned_annotations_df['image_id'].values
         ]
         print(
             f'· Succesfully deleted {len(orphaned_annotations_df)} orphaned annotations from processed coco json file.'
@@ -206,7 +206,7 @@ def process_data(
         new_json_data['images'] = [
             i
             for i in new_json_data['images']
-            if i['id'] in images_not_found_in_directory_df['image_id'].values
+            if i['id'] not in images_not_found_in_directory_df['image_id'].values
         ]
         print(
             f'· Succesfully deleted {len(images_not_found_in_directory_df)} images that were not found in expected directory from processed coco json file.'
@@ -214,7 +214,7 @@ def process_data(
         new_json_data['annotations'] = [
             i
             for i in new_json_data['annotations']
-            if i['image_id'] in images_not_found_in_directory_df['image_id'].values
+            if i['image_id'] not in images_not_found_in_directory_df['image_id'].values
         ]
         print(
             f'· Succesfully deleted {len(images_not_found_in_directory_df)} annotations linked to images that were not found in expected directory from processed coco json file.'
