@@ -5,10 +5,12 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
+    "fiftyone>=1.8.0",
     "ipykernel>=6.30.1",
     "matplotlib>=3.10.6",
     "pandas>=2.3.2",
     "seaborn>=0.13.2",
+    "ultralytics>=8.3.203",
 ]
 
 [tool.basedpyright]
