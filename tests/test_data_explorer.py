@@ -4,9 +4,9 @@ from prepare_data.data_explorer import get_basic_informations
 
 def test_get_basic_informations_invalid_coco_json_structure():
     mock_json = {
-        'cat': {'category_id': 0, 'name': 'fire', 'supercategory': 'wildfire'},
-        'img': {'image_id': 0},
-        'ann': {'annotation_id': 0, 'image_id': 0, 'category_id': 0},
+        'cat': [{'category_id': 0, 'name': 'fire', 'supercategory': 'wildfire'}],
+        'img': [{'image_id': 0}],
+        'ann': [{'annotation_id': 0, 'image_id': 0, 'category_id': 0}],
     }
 
     df_images = pd.json_normalize(mock_json['img'])
