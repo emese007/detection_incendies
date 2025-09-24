@@ -11,6 +11,7 @@ dependencies = [
     "pandas>=2.3.2",
     "pytest>=8.4.2",
     "seaborn>=0.13.2",
+    "ultralytics>=8.3.203",
 ]
 
 [tool.basedpyright]

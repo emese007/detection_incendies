@@ -175,6 +175,11 @@ def preprocess_data(
         print(
             f'· Succesfully deleted {len(invalid_annotations_df)} images that had invalid annotations from preprocessed coco json file.'
         )
+        new_json_data['annotations'] = [
+            i
+            for i in new_json_data['annotations']
+            if i['image_id'] not in invalid_annotations_df['image_id'].values
+        ]
     else:
         print(
             '· No invalid annotation was found therefore no image has been deleted from preprocessed coco json file.'

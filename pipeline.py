@@ -13,6 +13,8 @@ from prepare_data.data_cleaner import (
     get_orphaned_annotations,
     preprocess_data,
 )
+from visualization.run_visualization import run_visualization
+from prepare_data.data_preparation import convert_annotations
 
 
 def run_pipeline():
@@ -32,3 +34,7 @@ def run_pipeline():
     get_invalid_annotations(df)
 
     preprocess_data('./data/raw/', df, json_data)
+
+    # run_visualization()
+
+    convert_annotations('./data/preprocessed/data/')
