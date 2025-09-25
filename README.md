@@ -27,7 +27,7 @@ uv run train.py
 
 ### Nettoyage des données
 
-Nous supprimons de notre dossier de données, tout fichier qui n'ait pas pour extension un format d'image ou le format `.json` (à implémenter)
+Tous les fichiers ne correspondant pas à un format d'image ou au format `.json` sont supprimés de notre dossier de données.
 
 Nous supprimons du fichier COCO JSON :
 
