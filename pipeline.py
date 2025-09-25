@@ -14,7 +14,7 @@ from prepare_data.data_cleaner import (
     preprocess_data,
 )
 from visualization.run_visualization import run_visualization
-from prepare_data.data_preparation import convert_annotations
+from prepare_data.data_preparation import convert_annotations, split_dataset
 
 
 def run_pipeline():
@@ -38,3 +38,4 @@ def run_pipeline():
     # run_visualization()
 
     convert_annotations('./data/preprocessed/data/')
+    split_dataset('./data/converted/')
