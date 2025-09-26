@@ -13,7 +13,7 @@ git clone git@github.com:emese007/detection_incendies.git
 cd detection_incendies
 ```
 
-### 2. Lancer le script
+### 2. Lancer les scripts
 
 ```bash
 # Préparation des données
